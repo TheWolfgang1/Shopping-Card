@@ -42,12 +42,12 @@ function updateQuantityDisplay(productName) {
   document.querySelectorAll('.card-body').forEach(cardBody => {
     const cardTitle = cardBody.querySelector('.card-title').textContent; // récupère le nom du produit
     if (cardTitle === productName) { // vérifie si le nom correspond
-      const quantityElement = cardBody.querySelector('.quantity');
-      const existingProduct = cart.find(item => item.name === productName);
+      const quantityElement = cardBody.querySelector('.quantity'); // je prend l'élément qui affiche la quantité
+      const existingProduct = cart.find(item => item.name === productName); // vérifie si le produit est encore dans le panier
       if (existingProduct) {
-        quantityElement.textContent = existingProduct.quantity;
+        quantityElement.textContent = existingProduct.quantity; // met à jour la quantité
       } else {
-        quantityElement.textContent = '0';
+        quantityElement.textContent = '0'; // la quantité est 0 si le produit n'est plus dans le panier
       }
     }
   });
@@ -74,17 +74,17 @@ function addToFavorites(productName, heartButton) {
 
 
 document.querySelectorAll('.fa-plus-circle').forEach(button => {
-  button.addEventListener('click', () => {
+  button.addEventListener('click', () => { // addEventListener pour récupérer le click
     const productName = button.closest('.card-body').querySelector('.card-title').textContent;
     const price = parseFloat(button.closest('.card-body').querySelector('.unit-price').textContent.replace(' $', ''));
-    addProduct(productName, price);
+    addProduct(productName, price); // j'appelle addProduct() pour ajouter le produit au panier
   });
 });
 
 document.querySelectorAll('.fa-minus-circle').forEach(button => {
-  button.addEventListener('click', () => {
-    const productName = button.closest('.card-body').querySelector('.card-title').textContent;
-    removeProduct(productName);
+  button.addEventListener('click', () => { // lesture du click
+    const productName = button.closest('.card-body').querySelector('.card-title').textContent; // je récupère le produit
+    removeProduct(productName); // je rappelle removeProduct() pour baisser la quantité
   });
 });
 
